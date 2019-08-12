@@ -13,50 +13,55 @@
             } */
             #container {
                 display: grid;
-                width: 960px;
-                grid-column-gap: 10px;
-                grid-template-columns: repeat(4, minmax(1px,1fr));
-                grid-template-rows: repeat(5, minmax(1px,1fr));
+                width: 360px;
+                grid-column-gap: 6px;
+                grid-template-columns: repeat(4, minmax(30px,1fr));
+                grid-template-rows: repeat(5, minmax(100px,1fr));
                 text-align: center;
+                border: solid red 2px;
+                margin: auto;
 
             }
-            .button {
-                color: black;
-                text-align: center;
-               
+            #container div  {
+                margin: 2px;
+                padding: 40px 0;
+                border: solid black 1px;
             }
-
+    
             .button0 {
                 grid-column: 1/4;
             }
-            .button14 {
+            .button16 {
                 grid-column: span 2;
             }
-        
+            .display {
+                grid-column: span 4;
+            }
             
         </style>
             <div id="container">
+                <div class="display"></div>
                 <div class="button0">C</div>
                 <div class="button1">/</div>
-                <div class="button2">*</div>
-                <div class="button3">9</div>
-                <div class="button4">8</div>
-                <div class="button5">7</div>
-                <div class="button6">-</div>
-                <div class="button7">6</div>
-                <div class="button8">5</div>
-                <div class="button9">4</div>
-                <div class="button10">+</div>
-                <div class="button11">3</div>
-                <div class="button12">2</div>
-                <div class="button13">1</div>
-                <div class="button14">=</div>
+                <div class="button2">7</div>
+                <div class="button3">8</div>
+                <div class="button4">9</div>
+                <div class="button5">*</div>
+                <div class="button6">4</div>
+                <div class="button7">5</div>
+                <div class="button8">6</div>
+                <div class="button9">-</div>
+                <div class="button10">1</div>
+                <div class="button11">2</div>
+                <div class="button12">3</div>
+                <div class="button13">+</div>
+                <div class="button14">0</div>
                 <div class="button15">.</div>
-                <div class="button16">0</div>               
+                <div class="button16">=</div>               
     </div>
 
         <script>
-            
+       
 
         function add(a,b){
             return a + b;
@@ -70,6 +75,9 @@
         function divide(a,b){
             return a / b;
         }
+///////
+
+
         function operate(a,b){
             return divide(a,b);
             
