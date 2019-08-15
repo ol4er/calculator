@@ -72,18 +72,16 @@
        
 //////
         function add(a,b){
-            return +a + +b;
             console.log('you hit the add function')
+            return +a + +b; //the +a +b ensures it doesn't concat that shit
         }
         function subtract(a,b){
+            console.log('you hit the subtract function')
             return a - b;
-                        console.log('you hit the subtract function')
-
         }
         function multiply(a,b){
-            return a * b;
             console.log('you hit the mulitply function')
-
+            return a * b;
         }
         function divide(a,b){
             return a / b;
