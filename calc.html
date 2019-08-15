@@ -28,11 +28,15 @@
                 padding: 20px 0;
                 border: solid black 1px;
             }
+            #container div:hover {
+                /* border: solid hotpink 2px; */
+                box-shadow: 0px 0px 2px gray;
+            }
     
-            .button0 {
+            #clearButton {
                 grid-column: 1/4;
             }
-            .button16 {
+            #equalsButton {
                 grid-column: span 2;
             }
             .display {
@@ -44,47 +48,140 @@
         </style>
             <div id="container">
                 <div class="display">blaguehrhg</div>
-                <div class="button0">C</div>
-                <div class="button1">/</div>
-                <div class="button2">7</div>
-                <div class="button3">8</div>
-                <div class="button4">9</div>
-                <div class="button5">*</div>
-                <div class="button6">4</div>
-                <div class="button7">5</div>
-                <div class="button8">6</div>
-                <div class="button9">-</div>
-                <div class="button10">1</div>
-                <div class="button11">2</div>
-                <div class="button12">3</div>
-                <div class="button13">+</div>
-                <div class="button14">0</div>
-                <div class="button15">.</div>
-                <div class="button16">=</div>               
+
+                <div class="button" id="clearButton" data-value="C">C</div>
+                <div class="button" data-value="divide">/</div>
+                <div class="button" data-value="7">7</div>
+                <div class="button" data-value="8">8</div>
+                <div class="button" data-value="9">9</div>
+                <div class="button" data-value="multiply">*</div>
+                <div class="button" data-value="4">4</div>
+                <div class="button" data-value="5">5</div>
+                <div class="button" data-value="6">6</div>
+                <div class="button" data-value="subtract">-</div>
+                <div class="button" data-value="1">1</div>
+                <div class="button" data-value="2">2</div>
+                <div class="button" data-value="3">3</div>
+                <div class="button" data-value="add">+</div>
+                <div class="button" data-value="0">0</div>
+                <div class="button" data-value="decimal">.</div>
+                <div class="button" id="equalsButton" data-value="equals">=</div>               
     </div>
 
         <script>
        
-
+//////
         function add(a,b){
-            return a + b;
+            return +a + +b;
+            console.log('you hit the add function')
         }
         function subtract(a,b){
             return a - b;
+                        console.log('you hit the subtract function')
+
         }
         function multiply(a,b){
             return a * b;
+            console.log('you hit the mulitply function')
+
         }
         function divide(a,b){
             return a / b;
         }
 ///////
 
+//operate needs to update button pressed = display
 
-        function operate(a,b){
-            return divide(a,b);
-            
-        }        
+        ////button functionality
+
+let result = '';
+let num1 = ''; //input 1, active until "thing" is pressed (an operator)
+let num2 = ''; //input 2, only exists after "thing" is declared - num1 becomes the operated num1 and num2 once and operator OR equals is pressed. 
+let thing = '';
+const disp = document.querySelector('.display');
+function clear(){
+           disp.textContent = '0';
+       }
+
+///nicked from https://repl.it/@I3uckwheat/Calculator-num1-num2-thing
+document.querySelectorAll(".button").forEach(element => element.addEventListener('click', buttonHandler));
+
+function buttonHandler(){
+    const inputValue = this.getAttribute('data-value');
+    //if inputValue == 1, it's a digit, if it's > 1, it's a "thing" (operator or decimal)
+    if (inputValue.length === 1 && result === ''){
+        num1 += inputValue;
+        console.log("first if");
+    } else if (inputValue.length === 1 && result != ''){
+        num1 += inputValue;
+        console.log('second if');
+
+    } else if (inputValue.length > 1 && inputValue != 'equals') {
+        console.log("OPERATOR if");
+        thing = inputValue; //which operator, times, divide etc
+        result = num1; //num1 is shifted over to result to allow for input following operator.
+        num1 = '';
+
+        if (thing === "add"){
+            // num1 = '';
+        }
+    }
+
+    
+
+
+
+		
+
+        
+	// } else if (num1 && thing) {
+	// 	num2 += inputValue;
+	// } else {
+	// 	num1 += inputValue;
+	// }
+    if (inputValue === 'equals'){
+        operate();
+    }
+    if (inputValue === 'C'){ 
+        clearScreen();
+        } else { 
+            displayInfo(); //displays input - which is num1, for some reason
+            }
+}
+console.log(multiply(3,4));
+function operate() {
+    if (thing === 'add'){
+     num2 = add(result,num1);  
+    } else if(thing === 'multiply'){
+        num2 = multiply(result,num1);
+    } else if(thing === 'divide'){
+        num2 = divide(result,num1);
+    } else if(thing === 'subtract'){
+        num2 = subtract(result,num1);
+    }
+
+
+
+
+    num1 = num2; 
+
+}
+function clearScreen(){
+    disp.textContent = "0";
+    num1 = '';
+    num2 = '';
+    thing = '';
+}
+function displayInfo() {
+    disp.textContent = num1;
+
+	// disp.innerHTML = ""
+    // const info = document.createElement('p');
+	// info.innerText = num1 + num2 + thing;
+	// disp.appendChild(info);
+}
+
+
         </script>
     </body>
 </html>
