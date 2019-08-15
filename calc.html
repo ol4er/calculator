@@ -6,12 +6,6 @@
     </head>
     <body>
         <style>
-            /* #result {
-                height: 25px;
-                width: 480px;
-                background-color: hotpink;
-                align-content: center;
-            } */
             #container {
                 display: grid;
                 width: 360px;
@@ -47,7 +41,7 @@
             
         </style>
             <div id="container">
-                <div class="display">blaguehrhg</div>
+                <div class="display">Calculator</div>
 
                 <div class="button" id="clearButton" data-value="C">C</div>
                 <div class="button" data-value="divide">/</div>
@@ -69,41 +63,34 @@
     </div>
 
         <script>
-       
-//////
-        function add(a,b){
-            console.log('you hit the add function')
-            return +a + +b; //the +a +b ensures it doesn't concat that shit
-        }
-        function subtract(a,b){
-            console.log('you hit the subtract function')
-            return a - b;
-        }
-        function multiply(a,b){
-            console.log('you hit the mulitply function')
-            return a * b;
-        }
-        function divide(a,b){
-            return a / b;
-        }
-///////
-
-//operate needs to update button pressed = display
-
-        ////button functionality
+//////doin the func///////
+function add(a,b){
+    console.log('you hit the add function')
+    return +a + +b; //the +a +b ensures it doesn't concat that shit
+}
+function subtract(a,b){
+    console.log('you hit the subtract function')
+    return a - b;
+}
+function multiply(a,b){
+    console.log('you hit the mulitply function')
+    return a * b;
+}
+function divide(a,b){
+    return a / b;
+}
 
 let result = '';
 let num1 = ''; //input 1, active until "thing" is pressed (an operator)
 let num2 = ''; //input 2, only exists after "thing" is declared - num1 becomes the operated num1 and num2 once and operator OR equals is pressed. 
 let thing = '';
+let thingStr = '';
 const disp = document.querySelector('.display');
 function clear(){
            disp.textContent = '0';
        }
-
-///nicked from https://repl.it/@I3uckwheat/Calculator-num1-num2-thing
+///sorta nicked from https://repl.it/@I3uckwheat/Calculator-num1-num2-thing
 document.querySelectorAll(".button").forEach(element => element.addEventListener('click', buttonHandler));
-
 function buttonHandler(){
     const inputValue = this.getAttribute('data-value');
     //if inputValue == 1, it's a digit, if it's > 1, it's a "thing" (operator or decimal)
@@ -111,6 +98,9 @@ function buttonHandler(){
         num1 += inputValue;
         console.log("first if");
     } else if (inputValue.length === 1 && result != ''){
+        if(isNaN(num1)){
+            num1 = '';
+        }
         num1 += inputValue;
         console.log('second if');
 
@@ -118,20 +108,8 @@ function buttonHandler(){
         console.log("OPERATOR if");
         thing = inputValue; //which operator, times, divide etc
         result = num1; //num1 is shifted over to result to allow for input following operator.
-        num1 = '';
-
-        if (thing === "add"){
-            // num1 = '';
-        }
-    }
-
-    
-
-
-
-		
-
-        
+        num1 = inputValue;
+    }   
 	// } else if (num1 && thing) {
 	// 	num2 += inputValue;
 	// } else {
@@ -146,23 +124,18 @@ function buttonHandler(){
             displayInfo(); //displays input - which is num1, for some reason
             }
 }
-console.log(multiply(3,4));
 function operate() {
     if (thing === 'add'){
      num2 = add(result,num1);  
     } else if(thing === 'multiply'){
         num2 = multiply(result,num1);
     } else if(thing === 'divide'){
-        num2 = divide(result,num1);
+        num2 = divide(result,num1).toFixed(2);
     } else if(thing === 'subtract'){
         num2 = subtract(result,num1);
     }
-
-
-
-
-    num1 = num2; 
-
+    
+    num1 = num2;//.toFixed(2); //prints result limiting decimals to 2 places, 
 }
 function clearScreen(){
     disp.textContent = "0";
