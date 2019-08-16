@@ -100,9 +100,9 @@ function buttonHandler(){
     } else if (inputValue.length === 1 && result != ''){
         if(isNaN(num1)){
             num1 = '';
-        }
+        } 
         num1 += inputValue;
-        console.log('second if');
+        console.log('second if' + num1 + num2 + result);
 
     } else if (inputValue.length > 1 && inputValue != 'equals') {
         console.log("OPERATOR if");
@@ -117,7 +117,7 @@ function buttonHandler(){
 	// }
     if (inputValue === 'equals'){
         operate();
-    }
+           }
     if (inputValue === 'C'){ 
         clearScreen();
         } else { 
@@ -125,17 +125,19 @@ function buttonHandler(){
             }
 }
 function operate() {
-    if (thing === 'add'){
-     num2 = add(result,num1);  
-    } else if(thing === 'multiply'){
-        num2 = multiply(result,num1);
-    } else if(thing === 'divide'){
-        num2 = divide(result,num1).toFixed(2);
-    } else if(thing === 'subtract'){
-        num2 = subtract(result,num1);
+    if(thing != ''){
+        if (thing === 'add'){
+        num2 = add(result,num1);  
+        } else if(thing === 'multiply'){
+            num2 = multiply(result,num1);
+        } else if(thing === 'divide'){
+            num2 = divide(result,num1).toFixed(2);
+        } else if(thing === 'subtract'){
+            num2 = subtract(result,num1);
+        }
     }
-    
     num1 = num2;//.toFixed(2); //prints result limiting decimals to 2 places, 
+    console.log(result);
 }
 function clearScreen(){
     disp.textContent = "0";

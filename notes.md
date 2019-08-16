@@ -12,4 +12,4 @@ things to do:
 
 ensure input cant start on either 0 or equals or operators
 add decimal usage
-enable 8+8+8 etc
+enable 8+8+8
